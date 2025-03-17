@@ -1,0 +1,1400 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Old West Solutions | Enterprise Software Consulting</title>
+    <style>
+        /* German Dark Design - Typography */
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+        
+        /* Base Styles */
+        :root {
+            --primary-dark: #0c0c0c;
+            --secondary-dark: #171717;
+            --tertiary-dark: #232323;
+            --accent-gold: #d4af37;
+            --accent-gold-transparent: rgba(212, 175, 55, 0.2);
+            --text-light: #f1f1f1;
+            --text-muted: #a0a0a0;
+            --gradient-dark: linear-gradient(135deg, #171717 0%, #0a0a0a 100%);
+            --shadow-standard: 0 10px 30px rgba(0, 0, 0, 0.2);
+            --shadow-hover: 0 15px 40px rgba(0, 0, 0, 0.3);
+            --transition-standard: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--primary-dark);
+            color: var(--text-light);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+        
+        h1, h2, h3, h4, h5, h6 {
+            font-weight: 600;
+            line-height: 1.3;
+        }
+        
+        /* Animation Keyframes */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        @keyframes slideInLeft {
+            from { opacity: 0; transform: translateX(-50px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+        
+        @keyframes slideInRight {
+            from { opacity: 0; transform: translateX(50px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+        
+        @keyframes borderPulse {
+            0% { border-color: var(--accent-gold); }
+            50% { border-color: transparent; }
+            100% { border-color: var(--accent-gold); }
+        }
+        
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0px); }
+        }
+        
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        
+        .fade-in {
+            animation: fadeIn 1s forwards;
+        }
+        
+        .slide-in-left {
+            animation: slideInLeft 1s forwards;
+        }
+        
+        .slide-in-right {
+            animation: slideInRight 1s forwards;
+        }
+        
+        .delay-1 {
+            animation-delay: 0.2s;
+        }
+        
+        .delay-2 {
+            animation-delay: 0.4s;
+        }
+        
+        .delay-3 {
+            animation-delay: 0.6s;
+        }
+        
+        /* Header & Navigation */
+        header {
+            background-color: rgba(12, 12, 12, 0.95);
+            padding: 1.2rem 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+            transition: var(--transition-standard);
+        }
+        
+        header.scrolled {
+            padding: 0.8rem 0;
+            background-color: rgba(12, 12, 12, 0.98);
+        }
+        
+        .container {
+            width: 85%;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .logo span {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--text-light);
+            margin-left: 0.8rem;
+            transition: var(--transition-standard);
+        }
+        
+        .logo-icon {
+            width: 38px;
+            height: 38px;
+            background-color: transparent;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            transition: var(--transition-standard);
+        }
+        
+        .logo-icon:before {
+            content: "";
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            border: 2px solid var(--accent-gold);
+            transform: rotate(45deg);
+            animation: borderPulse 3s infinite;
+        }
+        
+        .logo-icon:after {
+            content: "OW";
+            color: var(--accent-gold);
+            font-weight: bold;
+            font-size: 18px;
+            z-index: 1;
+        }
+        
+        .logo:hover .logo-icon {
+            transform: rotate(45deg);
+        }
+        
+        .logo:hover span {
+            color: var(--accent-gold);
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+        
+        nav li {
+            margin-left: 3rem;
+        }
+        
+        nav a {
+            color: var(--text-light);
+            text-decoration: none;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-size: 0.85rem;
+            position: relative;
+            transition: var(--transition-standard);
+            padding: 0.5rem 0;
+        }
+        
+        nav a:hover {
+            color: var(--accent-gold);
+        }
+        
+        nav a:after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: 0;
+            left: 0;
+            background-color: var(--accent-gold);
+            transition: width 0.3s ease;
+        }
+        
+        nav a:hover:after {
+            width: 100%;
+        }
+        
+        .mobile-toggle {
+            display: none;
+            cursor: pointer;
+            z-index: 1000;
+        }
+        
+        .hamburger {
+            width: 30px;
+            height: 3px;
+            background-color: var(--text-light);
+            position: relative;
+            transition: var(--transition-standard);
+        }
+        
+        .hamburger:before,
+        .hamburger:after {
+            content: '';
+            position: absolute;
+            width: 30px;
+            height: 3px;
+            background-color: var(--text-light);
+            transition: var(--transition-standard);
+        }
+        
+        .hamburger:before {
+            transform: translateY(-10px);
+        }
+        
+        .hamburger:after {
+            transform: translateY(10px);
+        }
+        
+        .mobile-toggle.active .hamburger {
+            background-color: transparent;
+        }
+        
+        .mobile-toggle.active .hamburger:before {
+            transform: rotate(45deg);
+        }
+        
+        .mobile-toggle.active .hamburger:after {
+            transform: rotate(-45deg);
+        }
+        
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            background: linear-gradient(rgba(12, 12, 12, 0.8), rgba(12, 12, 12, 0.9)), url('/api/placeholder/1600/900') center/cover no-repeat;
+            position: relative;
+            overflow: hidden;
+            margin-top: 80px;
+        }
+        
+        .hero:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: repeating-linear-gradient(
+                -45deg,
+                transparent,
+                transparent 30px,
+                rgba(212, 175, 55, 0.03) 30px,
+                rgba(212, 175, 55, 0.03) 60px
+            );
+        }
+        
+        .hero:after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, rgba(212, 175, 55, 0.05) 0%, transparent 100%);
+            animation: gradientShift 15s ease infinite;
+            background-size: 200% 200%;
+        }
+        
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            max-width: 800px;
+            animation: fadeIn 1s ease-out;
+        }
+        
+        .hero h1 {
+            font-size: 4rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            line-height: 1.2;
+        }
+        
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 2.5rem;
+            max-width: 600px;
+            color: var(--text-muted);
+        }
+        
+        .accent {
+            color: var(--accent-gold);
+            position: relative;
+            display: inline-block;
+        }
+        
+        .accent:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 6px;
+            background-color: var(--accent-gold-transparent);
+            z-index: -1;
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 1rem 2.5rem;
+            background-color: transparent;
+            color: var(--accent-gold);
+            text-decoration: none;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            border: 2px solid var(--accent-gold);
+            transition: var(--transition-standard);
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
+        
+        .btn:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background-color: var(--accent-gold);
+            transition: var(--transition-standard);
+            z-index: -1;
+        }
+        
+        .btn:hover {
+            color: var(--primary-dark);
+        }
+        
+        .btn:hover:before {
+            left: 0;
+        }
+        
+        .scroll-indicator {
+            position: absolute;
+            bottom: 40px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 1;
+            opacity: 0.7;
+            animation: float 2s ease-in-out infinite;
+        }
+        
+        .scroll-indicator span {
+            display: block;
+            width: 30px;
+            height: 50px;
+            border: 2px solid var(--accent-gold);
+            border-radius: 20px;
+            position: relative;
+        }
+        
+        .scroll-indicator span:before {
+            content: '';
+            position: absolute;
+            top: 10px;
+            left: 50%;
+            width: 6px;
+            height: 6px;
+            background-color: var(--accent-gold);
+            border-radius: 50%;
+            transform: translateX(-50%);
+            animation: fadeIn 1.5s ease infinite;
+        }
+        
+        /* Services Section */
+        .section {
+            padding: 8rem 0;
+            position: relative;
+        }
+        
+        .section:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: transparent;
+            background-image: radial-gradient(var(--accent-gold-transparent) 1px, transparent 1px);
+            background-size: 40px 40px;
+            opacity: 0.05;
+            pointer-events: none;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 5rem;
+            position: relative;
+        }
+        
+        .section-title:after {
+            content: '';
+            position: absolute;
+            width: 60px;
+            height: 3px;
+            background-color: var(--accent-gold);
+            bottom: -20px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        
+        .section-subtitle {
+            color: var(--accent-gold);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 1rem;
+            font-size: 0.9rem;
+        }
+        
+        .section-description {
+            max-width: 700px;
+            margin: 0 auto 4rem;
+            text-align: center;
+            color: var(--text-muted);
+        }
+        
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2.5rem;
+        }
+        
+        .service-card {
+            background-color: var(--secondary-dark);
+            padding: 3rem;
+            border-left: 3px solid var(--accent-gold);
+            transition: var(--transition-standard);
+            position: relative;
+            overflow: hidden;
+            box-shadow: var(--shadow-standard);
+        }
+        
+        .service-card:hover {
+            transform: translateY(-15px);
+            box-shadow: var(--shadow-hover);
+            background-color: var(--tertiary-dark);
+        }
+        
+        .service-card:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, var(--accent-gold-transparent) 0%, transparent 100%);
+            opacity: 0;
+            transition: var(--transition-standard);
+        }
+        
+        .service-card:hover:before {
+            opacity: 0.1;
+        }
+        
+        .service-icon {
+            font-size: 2.5rem;
+            color: var(--accent-gold);
+            margin-bottom: 2rem;
+            transition: var(--transition-standard);
+        }
+        
+        .service-card:hover .service-icon {
+            transform: translateY(-5px);
+        }
+        
+        .service-title {
+            font-size: 1.5rem;
+            margin-bottom: 1.2rem;
+            transition: var(--transition-standard);
+        }
+        
+        .service-card:hover .service-title {
+            color: var(--accent-gold);
+        }
+        
+        .service-description {
+            color: var(--text-muted);
+            line-height: 1.8;
+        }
+        
+        /* Partners Section */
+        .partners {
+            background-color: var(--secondary-dark);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .partners:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to right, var(--secondary-dark) 0%, transparent 50%, var(--secondary-dark) 100%);
+            z-index: 1;
+        }
+        
+        .partners-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 3rem;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .partner-card {
+            background-color: var(--primary-dark);
+            padding: 3rem 2rem;
+            text-align: center;
+            border-bottom: 3px solid var(--accent-gold);
+            transition: var(--transition-standard);
+            box-shadow: var(--shadow-standard);
+        }
+        
+        .partner-card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow-hover);
+        }
+        
+        .partner-logo {
+            height: 70px;
+            width: 100%;
+            margin-bottom: 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+        
+        .partner-logo img {
+            max-height: 100%;
+            transition: var(--transition-standard);
+            filter: grayscale(100%) brightness(1.2);
+        }
+        
+        .partner-card:hover .partner-logo img {
+            filter: grayscale(0%);
+            transform: scale(1.05);
+        }
+        
+        .partner-name {
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            transition: var(--transition-standard);
+        }
+        
+        .partner-card:hover .partner-name {
+            color: var(--accent-gold);
+        }
+        
+        .partner-description {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            line-height: 1.8;
+        }
+        
+        /* Testimonials Section */
+        .testimonials {
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .testimonials:before,
+        .testimonials:after {
+            content: '"';
+            position: absolute;
+            font-size: 20rem;
+            color: var(--accent-gold-transparent);
+            opacity: 0.2;
+            font-family: serif;
+            line-height: 1;
+        }
+        
+        .testimonials:before {
+            top: -50px;
+            left: 30px;
+        }
+        
+        .testimonials:after {
+            bottom: -150px;
+            right: 30px;
+        }
+        
+        .testimonials-slider {
+            max-width: 900px;
+            margin: 0 auto;
+            text-align: center;
+        }
+        
+        .testimonial {
+            padding: 2rem;
+        }
+        
+        .testimonial-content {
+            font-size: 1.2rem;
+            font-style: italic;
+            margin-bottom: 2rem;
+            position: relative;
+            line-height: 1.8;
+        }
+        
+        .testimonial-author {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        .author-name {
+            font-weight: 600;
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .author-title {
+            color: var(--accent-gold);
+            font-size: 0.9rem;
+        }
+        
+        /* Contact Section */
+        .contact {
+            position: relative;
+        }
+        
+        .contact:before {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            background: url('/api/placeholder/1400/800') center/cover no-repeat;
+            opacity: 0.05;
+            filter: blur(10px);
+        }
+        
+        .contact-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
+            gap: 5rem;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .contact-info h3 {
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+            color: var(--accent-gold);
+        }
+        
+        .contact-info p {
+            margin-bottom: 2.5rem;
+            color: var(--text-muted);
+            line-height: 1.8;
+        }
+        
+        .contact-details {
+            margin-top: 2.5rem;
+        }
+        
+        .contact-item {
+            display: flex;
+            margin-bottom: 2rem;
+            align-items: flex-start;
+        }
+        
+        .contact-icon {
+            color: var(--accent-gold);
+            font-size: 1.2rem;
+            margin-right: 1.5rem;
+            padding-top: 0.2rem;
+        }
+        
+        .contact-text h4 {
+            margin-bottom: 0.5rem;
+            font-size: 1.1rem;
+        }
+        
+        .contact-text p {
+            margin-bottom: 0;
+            color: var(--text-muted);
+        }
+        
+        .contact-form {
+            background-color: var(--secondary-dark);
+            padding: 3rem;
+            border-left: 3px solid var(--accent-gold);
+            box-shadow: var(--shadow-standard);
+        }
+        
+        .form-group {
+            margin-bottom: 1.5rem;
+            position: relative;
+        }
+        
+        .form-label {
+            position: absolute;
+            left: 1rem;
+            top: 1rem;
+            color: var(--text-muted);
+            transition: var(--transition-standard);
+            pointer-events: none;
+        }
+        
+        .form-control {
+            width: 100%;
+            padding: 1rem;
+            background-color: var(--tertiary-dark);
+            border: none;
+            color: var(--text-light);
+            border-left: 2px solid transparent;
+            transition: var(--transition-standard);
+        }
+        
+        .form-control:focus {
+            outline: none;
+            border-left: 2px solid var(--accent-gold);
+            box-shadow: 0 0 0 2px rgba(212, 175, 55, 0.1);
+        }
+        
+        .form-control:focus + .form-label,
+        .form-control:not(:placeholder-shown) + .form-label {
+            transform: translateY(-2.5rem) scale(0.8);
+            color: var(--accent-gold);
+        }
+        
+        textarea.form-control {
+            resize: vertical;
+            min-height: 150px;
+        }
+        
+        /* Footer */
+        footer {
+            background-color: var(--secondary-dark);
+            padding: 4rem 0 2rem;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        footer:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 1px;
+            background: linear-gradient(to right, transparent, var(--accent-gold), transparent);
+        }
+        
+        .footer-top {
+            display: grid;
+            grid-template-columns: 1.5fr 1fr 1fr 1fr;
+            gap: 3rem;
+            margin-bottom: 4rem;
+        }
+        
+        .footer-info {
+            margin-right: 2rem;
+        }
+        
+        .footer-logo {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+        
+        .footer-logo-icon {
+            width: 35px;
+            height: 35px;
+            position: relative;
+            margin-right: 0.8rem;
+        }
+        
+        .footer-logo-icon:before {
+            content: "";
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            border: 2px solid var(--accent-gold);
+            transform: rotate(45deg);
+        }
+        
+        .footer-logo-icon:after {
+            content: "OW";
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: var(--accent-gold);
+            font-weight: bold;
+            font-size: 16px;
+        }
+        
+        .footer-logo-text {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: var(--text-light);
+        }
+        
+        .footer-description {
+            color: var(--text-muted);
+            margin-bottom: 1.5rem;
+            line-height: 1.8;
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 1rem;
+        }
+        
+        .social-link {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background-color: var(--tertiary-dark);
+            color: var(--text-light);
+            border-radius: 50%;
+            transition: var(--transition-standard);
+        }
+        
+        .social-link:hover {
+            background-color: var(--accent-gold);
+            color: var(--primary-dark);
+            transform: translateY(-5px);
+        }
+        
+        .footer-title {
+            font-size: 1.2rem;
+            margin-bottom: 1.5rem;
+            position: relative;
+            padding-bottom: 0.8rem;
+        }
+        
+        .footer-title:after {
+            content: '';
+            position: absolute;
+            width: 30px;
+            height: 2px;
+            background-color: var(--accent-gold);
+            bottom: 0;
+            left: 0;
+        }
+        
+        .footer-links {
+            list-style: none;
+        }
+        
+        .footer-links li {
+            margin-bottom: 1rem;
+        }
+        
+        .footer-links a {
+            color: var(--text-muted);
+            text-decoration: none;
+            transition: var(--transition-standard);
+            display: block;
+            position: relative;
+            padding-left: 15px;
+        }
+        
+        .footer-links a:before {
+            content: '→';
+            position: absolute;
+            left: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--accent-gold);
+            font-size: 0.8rem;
+            opacity: 0;
+            transition: var(--transition-standard);
+        }
+        
+        .footer-links a:hover {
+            color: var(--text-light);
+            padding-left: 20px;
+        }
+        
+        .footer-links a:hover:before {
+            opacity: 1;
+        }
+        
+        .footer-contact li {
+            display: flex;
+            margin-bottom: 1rem;
+            color: var(--text-muted);
+        }
+        
+        .footer-contact i {
+            color: var(--accent-gold);
+            margin-right: 1rem;
+            min-width: 20px;
+        }
+        
+        .footer-bottom {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        
+        .copyright {
+            color: var(--text-muted);
+        }
+        
+        .footer-nav {
+            display: flex;
+            gap: 2rem;
+        }
+        
+        .footer-nav a {
+            color: var(--text-muted);
+            text-decoration: none;
+            transition: var(--transition-standard);
+            font-size: 0.9rem;
+        }
+        
+        .footer-nav a:hover {
+            color: var(--accent-gold);
+        }
+        
+        /* Responsive */
+        @media (max-width: 1200px) {
+            .hero h1 {
+                font-size: 3.5rem;
+            }
+            
+            .footer-top {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .footer-info {
+                grid-column: span 2;
+                margin-right: 0;
+            }
+        }
+        
+        @media (max-width: 992px) {
+            .hero h1 {
+                font-size: 3rem;
+            }
+            
+            .service-card {
+                padding: 2.5rem;
+            }
+            
+            .footer-bottom {
+                flex-direction: column;
+                gap: 1rem;
+                text-align: center;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .hero p {
+                font-size: 1rem;
+            }
+            
+            .container {
+                width: 90%;
+            }
+            
+            nav ul {
+                display: none;
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100vh;
+                background-color: var(--primary-dark);
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                gap: 2rem;
+                z-index: 5;
+                transition: var(--transition-standard);
+            }
+            
+            nav ul.active {
+                display: flex;
+            }
+            
+            nav li {
+                margin-left: 0;
+            }
+            
+            nav a {
+                font-size: 1.2rem;
+            }
+            
+            .mobile-toggle {
+                display: block;
+            }
+            
+            .contact-content {
+                grid-template-columns: 1fr;
+            }
+            
+            .footer-top {
+                grid-template-columns: 1fr;
+            }
+            
+            .footer-info {
+                grid-column: span 1;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header & Navigation -->
+    <header id="header">
+        <div class="container nav-container">
+            <div class="logo">
+                <div class="logo-icon"></div>
+                <span>Old West Solutions</span>
+            </div>
+            <nav>
+                <ul id="main-menu">
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#services">Services</a></li>
+                    <li><a href="#partners">Partners</a></li>
+                    <li><a href="#testimonials">Testimonials</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+                <div class="mobile-toggle" id="mobile-toggle">
+                    <div class="hamburger"></div>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="container hero-content">
+            <h1 class="fade-in">Pioneering <span class="accent">Digital Frontiers</span> with Enterprise Solutions</h1>
+            <p class="fade-in delay-1">Old West Solutions delivers cutting-edge software consulting and cloud development services through our premium partner network including Digital Ocean, AWS, Azure, and Oracle.</p>
+            <div class="fade-in delay-2">
+                <a href="#contact" class="btn">Consult With Us</a>
+            </div>
+        </div>
+        <div class="scroll-indicator">
+            <span></span>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="section">
+        <div class="container">
+            <div class="section-title">
+                <p class="section-subtitle">Our Expertise</p>
+                <h2>Software Consulting Services</h2>
+            </div>
+            <p class="section-description">
+                Our team of expert consultants leverages years of industry experience to deliver exceptional 
+                enterprise solutions designed to transform your business operations and drive sustainable growth.
+            </p>
+            <div class="services-grid">
+                <div class="service-card slide-in-left">
+                    <div class="service-icon">⚙️</div>
+                    <h3 class="service-title">Website Deployment</h3>
+                    <p class="service-description">From static sites to complex web applications, we handle deployments with precision, security, and performance optimization for enterprise-grade solutions.</p>
+                </div>
+                <div class="service-card fade-in delay-1">
+                    <div class="service-icon">☁️</div>
+                    <h3 class="service-title">Cloud Development</h3>
+                    <p class="service-description">Harness the power of cloud computing with custom solutions built for scalability, reliability, and cost efficiency across multiple infrastructure providers.</p>
+                </div>
+                <div class="service-card slide-in-right">
+                    <div class="service-icon">🔒</div>
+                    <h3 class="service-title">Security Architecture</h3>
+                    <p class="service-description">Protect your digital assets with enterprise-grade security infrastructure, advanced threat protection, and regulatory compliance frameworks.</p>
+                </div>
+                <div class="service-card slide-in-left">
+                    <div class="service-icon">📊</div>
+                    <h3 class="service-title">Data Integration</h3>
+                    <p class="service-description">Seamlessly connect disparate systems and build robust data pipelines for analytics, business intelligence, and actionable insights that drive decision-making.</p>
+                </div>
+                <div class="service-card fade-in delay-1">
+                    <div class="service-icon">🚀</div>
+                    <h3 class="service-title">DevOps Implementation</h3>
+                    <p class="service-description">Streamline your development lifecycle with automated processes, continuous integration and delivery pipelines, and infrastructure as code methodologies.</p>
+                </div>
+                <div class="service-card slide-in-right">
+                    <div class="service-icon">💼</div>
+                    <h3 class="service-title">Enterprise Consulting</h3>
+                    <p class="service-description">Strategic technology guidance tailored to your business objectives and long-term digital transformation goals with measurable ROI and sustainable growth strategies.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Partners Section -->
+    <section id="partners" class="section partners">
+        <div class="container">
+            <div class="section-title">
+                <p class="section-subtitle">Our Network</p>
+                <h2>Cloud Partners</h2>
+            </div>
+            <p class="section-description">
+                As certified partners with the industry's leading cloud providers, we deliver tailored solutions 
+                that leverage the full capabilities of each platform while ensuring optimal performance and cost efficiency.
+            </p>
+            <div class="partners-grid">
+                <div class="partner-card fade-in">
+                    <div class="partner-logo">
+                        <img src="/api/placeholder/150/60" alt="Digital Ocean Logo">
+                    </div>
+                    <h3 class="partner-name">Digital Ocean</h3>
+                    <p class="partner-description">Premier cloud platform for developers to build, deploy, and scale applications with predictable pricing and developer-friendly infrastructure.</p>
+                </div>
+                <div class="partner-card fade-in delay-1">
+                    <div class="partner-logo">
+                        <img src="/api/placeholder/150/60" alt="AWS Logo">
+                    </div>
+                    <h3 class="partner-name">Amazon Web Services</h3>
+                    <p class="partner-description">Comprehensive cloud computing platform with over 200 fully featured services from data centers globally, offering unmatched scalability and reliability.</p>
+                </div>
+                <div class="partner-card fade-in delay-2">
+                    <div class="partner-logo">
+                        <img src="/api/placeholder/150/60" alt="Azure Logo">
+                    </div>
+                    <h3 class="partner-name">Microsoft Azure</h3>
+                    <p class="partner-description">Enterprise-grade cloud computing platform offering hybrid solutions, advanced AI capabilities, and integrated developer tools for modern business applications.</p>
+                </div>
+                <div class="partner-card fade-in delay-3">
+                    <div class="partner-logo">
+                        <img src="/api/placeholder/150/60" alt="Oracle Logo">
+                    </div>
+                    <h3 class="partner-name">Oracle Cloud</h3>
+                    <p class="partner-description">High-performance infrastructure platform with integrated security, autonomous database capabilities, and enterprise applications for mission-critical workloads.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Testimonials Section -->
+    <section id="testimonials" class="section testimonials">
+        <div class="container">
+            <div class="section-title">
+                <p class="section-subtitle">Client Success</p>
+                <h2>What Our Clients Say</h2>
+            </div>
+            <div class="testimonials-slider fade-in">
+                <div class="testimonial">
+                    <p class="testimonial-content">
+                        "Old West Solutions transformed our infrastructure deployment process, reducing our time-to-market by 65% while improving system reliability. Their expertise across multiple cloud platforms allowed us to optimize our architecture for both performance and cost."
+                    </p>
+                    <div class="testimonial-author">
+                        <h4 class="author-name">Sarah Johnson</h4>
+                        <p class="author-title">CTO, Nexus Technologies</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Contact Section -->
+    <section id="contact" class="section contact">
+        <div class="container">
+            <div class="section-title">
+                <p class="section-subtitle">Get In Touch</p>
+                <h2>Start Your Digital Transformation</h2>
+            </div>
+            <div class="contact-content">
+                <div class="contact-info fade-in">
+                    <h3>Ready to pioneer your digital frontier?</h3>
+                    <p>Our team of expert consultants is ready to help you navigate the complex landscape of software development and cloud solutions. Let's build something exceptional together that drives your business forward.</p>
+                    <div class="contact-details">
+                        <div class="contact-item">
+                            <div class="contact-icon">📍</div>
+                            <div class="contact-text">
+                                <h4>Visit Us</h4>
+                                <p>2001 Tech Boulevard, Suite 404<br>Denver, CO 80202</p>
+                            </div>
+                        </div>
+                        <div class="contact-item">
+                            <div class="contact-icon">📱</div>
+                            <div class="contact-text">
+                                <h4>Call Us</h4>
+                                <p>+1 (720) 555-8900</p>
+                            </div>
+                        </div>
+                        <div class="contact-item">
+                            <div class="contact-icon">✉️</div>
+                            <div class="contact-text">
+                                <h4>Email Us</h4>
+                                <p>info@oldwestsolutions.com</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="contact-form fade-in delay-1">
+                    <form>
+                        <div class="form-group">
+                            <input type="text" class="form-control" id="name" placeholder=" " required>
+                            <label for="name" class="form-label">Your Name</label>
+                        </div>
+                        <div class="form-group">
+                            <input type="email" class="form-control" id="email" placeholder=" " required>
+                            <label for="email" class="form-label">Your Email</label>
+                        </div>
+                        <div class="form-group">
+                            <input type="text" class="form-control" id="subject" placeholder=" ">
+                            <label for="subject" class="form-label">Subject</label>
+                        </div>
+                        <div class="form-group">
+                            <textarea class="form-control" id="message" placeholder=" " required></textarea>
+                            <label for="message" class="form-label">Your Message</label>
+                        </div>
+                        <button type="submit" class="btn">Send Message</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-top">
+                <div class="footer-info">
+                    <div class="footer-logo">
+                        <div class="footer-logo-icon"></div>
+                        <span class="footer-logo-text">Old West Solutions</span>
+                    </div>
+                    <p class="footer-description">
+                        Pioneering digital frontiers with enterprise solutions that transform businesses through innovative cloud development and strategic software consulting.
+                    </p>
+                    <div class="social-links">
+                        <a href="#" class="social-link">in</a>
+                        <a href="#" class="social-link">tw</a>
+                        <a href="#" class="social-link">gh</a>
+                        <a href="#" class="social-link">fb</a>
+                    </div>
+                </div>
+                <div class="footer-column">
+                    <h3 class="footer-title">Services</h3>
+                    <ul class="footer-links">
+                        <li><a href="#services">Website Deployment</a></li>
+                        <li><a href="#services">Cloud Development</a></li>
+                        <li><a href="#services">Security Architecture</a></li>
+                        <li><a href="#services">Data Integration</a></li>
+                        <li><a href="#services">DevOps Implementation</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3 class="footer-title">Company</h3>
+                    <ul class="footer-links">
+                        <li><a href="#home">About Us</a></li>
+                        <li><a href="#testimonials">Case Studies</a></li>
+                        <li><a href="#partners">Partners</a></li>
+                        <li><a href="#contact">Careers</a></li>
+                        <li><a href="#contact">Contact Us</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3 class="footer-title">Contact</h3>
+                    <ul class="footer-contact">
+                        <li><i>📍</i> 2001 Tech Boulevard, Suite 404, Denver, CO 80202</li>
+                        <li><i>📱</i> +1 (720) 555-8900</li>
+                        <li><i>✉️</i> info@oldwestsolutions.com</li>
+                        <li><i>🕒</i> Monday - Friday: 9:00 AM - 6:00 PM</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p class="copyright">© 2025 Old West Solutions. All rights reserved.</p>
+                <div class="footer-nav">
+                    <a href="#">Privacy Policy</a>
+                    <a href="#">Terms of Service</a>
+                    <a href="#">Cookie Policy</a>
+                    <a href="#">Sitemap</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Header scroll effect
+            const header = document.getElementById('header');
+            window.addEventListener('scroll', function() {
+                if (window.scrollY > 100) {
+                    header.classList.add('scrolled');
+                } else {
+                    header.classList.remove('scrolled');
+                }
+            });
+
+            // Mobile menu toggle
+            const mobileToggle = document.getElementById('mobile-toggle');
+            const mainMenu = document.getElementById('main-menu');
+            
+            mobileToggle.addEventListener('click', function() {
+                this.classList.toggle('active');
+                mainMenu.classList.toggle('active');
+            });
+
+            // Smooth scrolling for anchor links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    
+                    if (mainMenu.classList.contains('active')) {
+                        mainMenu.classList.remove('active');
+                        mobileToggle.classList.remove('active');
+                    }
+
+                    document.querySelector(this.getAttribute('href')).scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                });
+            });
+            
+            // Animation on scroll
+            const animatedElements = document.querySelectorAll('.fade-in, .slide-in-left, .slide-in-right');
+            
+            function checkInView() {
+                animatedElements.forEach(element => {
+                    const elementTop = element.getBoundingClientRect().top;
+                    const elementVisible = 150;
+                    
+                    if (elementTop < window.innerHeight - elementVisible) {
+                        element.style.opacity = '1';
+                        element.style.transform = 'translateY(0)';
+                    }
+                });
+            }
+            
+            // Initial check
+            checkInView();
+            
+            // Check on scroll
+            window.addEventListener('scroll', checkInView);
+        });
+    </script>
+</body>
+</html>
