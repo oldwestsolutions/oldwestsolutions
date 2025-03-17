@@ -138,53 +138,21 @@
         .logo {
             display: flex;
             align-items: center;
-            position: relative;
-            z-index: 2;
         }
         
         .logo span {
             font-size: 1.5rem;
             font-weight: 700;
             color: var(--text-light);
-            margin-left: 0.8rem;
             transition: var(--transition-standard);
-        }
-        
-        .logo-icon {
-            width: 38px;
-            height: 38px;
-            background-color: transparent;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            position: relative;
-            transition: var(--transition-standard);
-        }
-        
-        .logo-icon:before {
-            content: "";
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            border: 2px solid var(--accent-gold);
-            transform: rotate(45deg);
-            animation: borderPulse 3s infinite;
-        }
-        
-        .logo-icon:after {
-            content: "OW";
-            color: var(--accent-gold);
-            font-weight: bold;
-            font-size: 18px;
-            z-index: 1;
-        }
-        
-        .logo:hover .logo-icon {
-            transform: rotate(45deg);
         }
         
         .logo:hover span {
             color: var(--accent-gold);
+        }
+        
+        .logo-icon {
+            display: none;
         }
         
         nav ul {
@@ -275,8 +243,8 @@
         .hero {
             height: 100vh;
             display: flex;
-            align-items: center;
-            background: linear-gradient(rgba(12, 12, 12, 0.8), rgba(12, 12, 12, 0.9)), url('/api/placeholder/1600/900') center/cover no-repeat;
+            align-items: flex-start;
+            background: url('oldwestsolutionshero.jpeg') center/cover no-repeat;
             position: relative;
             overflow: hidden;
             margin-top: 80px;
@@ -315,6 +283,10 @@
             z-index: 1;
             max-width: 800px;
             animation: fadeIn 1s ease-out;
+            margin-top: 180px;
+            background: linear-gradient(to right, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.4), transparent);
+            padding: 40px;
+            border-radius: 8px;
         }
         
         .hero h1 {
@@ -322,13 +294,16 @@
             font-weight: 700;
             margin-bottom: 1.5rem;
             line-height: 1.2;
+            color: #ffffff;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
         }
         
         .hero p {
             font-size: 1.2rem;
             margin-bottom: 2.5rem;
             max-width: 600px;
-            color: var(--text-muted);
+            color: #ffffff;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
         }
         
         .accent {
@@ -440,6 +415,7 @@
             text-align: center;
             margin-bottom: 5rem;
             position: relative;
+            padding-bottom: 2rem;
         }
         
         .section-title:after {
@@ -447,8 +423,8 @@
             position: absolute;
             width: 60px;
             height: 3px;
-            background-color: var(--accent-gold);
-            bottom: -20px;
+            background: linear-gradient(to right, transparent, var(--accent-gold), transparent);
+            bottom: 0;
             left: 50%;
             transform: translateX(-50%);
         }
@@ -460,6 +436,27 @@
             letter-spacing: 2px;
             margin-bottom: 1rem;
             font-size: 0.9rem;
+            position: relative;
+            display: inline-block;
+        }
+        
+        .section-subtitle:before,
+        .section-subtitle:after {
+            content: '';
+            position: absolute;
+            width: 30px;
+            height: 1px;
+            background-color: var(--accent-gold);
+            top: 50%;
+            transform: translateY(-50%);
+        }
+        
+        .section-subtitle:before {
+            left: -40px;
+        }
+        
+        .section-subtitle:after {
+            right: -40px;
         }
         
         .section-description {
@@ -473,22 +470,18 @@
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 2.5rem;
+            position: relative;
         }
         
         .service-card {
-            background-color: var(--secondary-dark);
+            background: linear-gradient(145deg, var(--secondary-dark), var(--tertiary-dark));
             padding: 3rem;
+            border-radius: 15px;
             border-left: 3px solid var(--accent-gold);
             transition: var(--transition-standard);
             position: relative;
             overflow: hidden;
             box-shadow: var(--shadow-standard);
-        }
-        
-        .service-card:hover {
-            transform: translateY(-15px);
-            box-shadow: var(--shadow-hover);
-            background-color: var(--tertiary-dark);
         }
         
         .service-card:before {
@@ -498,9 +491,15 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: linear-gradient(135deg, var(--accent-gold-transparent) 0%, transparent 100%);
+            background: radial-gradient(circle at top left, var(--accent-gold-transparent), transparent 70%);
             opacity: 0;
             transition: var(--transition-standard);
+        }
+        
+        .service-card:hover {
+            transform: translateY(-15px);
+            box-shadow: var(--shadow-hover);
+            background: linear-gradient(145deg, var(--tertiary-dark), var(--secondary-dark));
         }
         
         .service-card:hover:before {
@@ -512,16 +511,34 @@
             color: var(--accent-gold);
             margin-bottom: 2rem;
             transition: var(--transition-standard);
+            position: relative;
         }
         
         .service-card:hover .service-icon {
-            transform: translateY(-5px);
+            transform: translateY(-5px) scale(1.1);
         }
         
         .service-title {
             font-size: 1.5rem;
             margin-bottom: 1.2rem;
             transition: var(--transition-standard);
+            position: relative;
+            display: inline-block;
+        }
+        
+        .service-title:after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--accent-gold);
+            transition: var(--transition-standard);
+        }
+        
+        .service-card:hover .service-title:after {
+            width: 100%;
         }
         
         .service-card:hover .service-title {
@@ -531,6 +548,8 @@
         .service-description {
             color: var(--text-muted);
             line-height: 1.8;
+            position: relative;
+            z-index: 1;
         }
         
         /* Partners Section */
@@ -1019,7 +1038,38 @@
             }
             
             .container {
-                width: 90%;
+                width: 95%;
+                padding: 0 10px;
+                overflow-x: hidden;
+            }
+            
+            body {
+                overflow-x: hidden;
+            }
+            
+            .hero-content {
+                margin-top: 120px;
+                padding: 30px;
+                width: 95%;
+            }
+            
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .services-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+                padding: 0 1rem;
+            }
+            
+            .service-card {
+                padding: 2rem;
+            }
+            
+            .section-subtitle:before,
+            .section-subtitle:after {
+                width: 20px;
             }
             
             nav ul {
@@ -1054,17 +1104,15 @@
                 display: block;
             }
             
-            .contact-content {
-                grid-template-columns: 1fr;
-            }
-            
-            .footer-top {
-                grid-template-columns: 1fr;
-            }
-            
             .footer-info {
                 grid-column: span 1;
             }
+        }
+        
+        /* Additional mobile fixes */
+        * {
+            max-width: 100%;
+            box-sizing: border-box;
         }
     </style>
 </head>
@@ -1190,6 +1238,20 @@
                     </div>
                     <h3 class="partner-name">Oracle Cloud</h3>
                     <p class="partner-description">High-performance infrastructure platform with integrated security, autonomous database capabilities, and enterprise applications for mission-critical workloads.</p>
+                </div>
+                <div class="partner-card fade-in delay-3">
+                    <div class="partner-logo">
+                        <img src="/api/placeholder/150/60" alt="IBM Cloud Logo">
+                    </div>
+                    <h3 class="partner-name">IBM Cloud</h3>
+                    <p class="partner-description">Enterprise-grade hybrid cloud solutions with advanced AI capabilities, quantum computing, and industry-leading security features.</p>
+                </div>
+                <div class="partner-card fade-in delay-3">
+                    <div class="partner-logo">
+                        <img src="/api/placeholder/150/60" alt="Salesforce Logo">
+                    </div>
+                    <h3 class="partner-name">Salesforce</h3>
+                    <p class="partner-description">World's leading CRM platform offering cloud-based solutions for sales, service, marketing, and enterprise digital transformation.</p>
                 </div>
             </div>
         </div>
