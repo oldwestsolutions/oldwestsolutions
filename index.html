@@ -1107,12 +1107,41 @@
             .footer-info {
                 grid-column: span 1;
             }
+            
+            .connect-wallet-btn {
+                padding: 0.6rem 1.2rem;
+                font-size: 0.9rem;
+            }
         }
         
         /* Additional mobile fixes */
         * {
             max-width: 100%;
             box-sizing: border-box;
+        }
+        
+        .connect-wallet-btn {
+            display: flex;
+            align-items: center;
+            background: linear-gradient(to right, var(--accent-gold), #b08c2c);
+            color: var(--primary-dark);
+            padding: 0.8rem 1.5rem;
+            border-radius: 6px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: var(--transition-standard);
+            border: 1px solid transparent;
+        }
+        
+        .connect-wallet-btn:hover {
+            background: transparent;
+            color: var(--accent-gold);
+            border: 1px solid var(--accent-gold);
+        }
+        
+        .wallet-icon {
+            margin-right: 8px;
+            font-size: 0.9em;
         }
     </style>
 </head>
@@ -1126,12 +1155,15 @@
             </div>
             <nav>
                 <ul id="main-menu">
-                    <li><a href="#home">Home</a></li>
-                    <li><a href="#domains">Domains</a></li>
-                    <li><a href="#partners">Partners</a></li>
-                    <li><a href="#portfolio">Portfolio</a></li>
-                    <li><a href="#contact">Contact</a></li>
+                    <!-- Navigation items removed -->
                 </ul>
+                <a href="login.html" class="connect-wallet-btn">
+                    <svg class="wallet-icon" viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <rect x="2" y="5" width="20" height="14" rx="2" />
+                        <line x1="2" y1="10" x2="22" y2="10" />
+                    </svg>
+                    Connect Wallet
+                </a>
                 <div class="mobile-toggle" id="mobile-toggle">
                     <div class="hamburger"></div>
                 </div>
@@ -1143,7 +1175,6 @@
     <section id="home" class="hero">
         <div class="container hero-content">
             <h1 class="fade-in">Pioneering <span class="accent">Digital Frontiers</span> with Enterprise Solutions</h1>
-            <p class="fade-in delay-1">Old West Solutions delivers cutting-edge software consulting and cloud development services through our premium partner network including Digital Ocean, AWS, Azure, and Oracle.</p>
             <div class="fade-in delay-2">
                 <a href="#domains" class="btn">Domains</a>
             </div>
